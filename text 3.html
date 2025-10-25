@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Unlock Script — Waguri Roblox</title>
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#1e2936;
+      --muted:#9aa5b1;
+      --accent: #2b9cf8;
+      --btn1: #3b82f6;
+      --btn2: #f43f5e;
+      --btn3: #f59e0b;
+      --radius:16px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{
+      height:100%;
+      margin:0;
+      background:linear-gradient(180deg,#071022 0%, #071628 100%), var(--bg);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    .wrap{
+      min-height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+      box-sizing:border-box;
+    }
+    .card{
+      width:100%;
+      max-width:420px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+      text-align:center;
+    }
+
+    .profile {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      margin-bottom:18px;
+    }
+    .profile img {
+      width:90px;
+      height:90px;
+      border-radius:50%;
+      object-fit:cover;
+      box-shadow:0 0 20px rgba(59,130,246,0.4);
+      border:2px solid rgba(255,255,255,0.05);
+    }
+    .profile h2 {
+      margin:10px 0 0 0;
+      font-size:20px;
+      color:#67d3ff;
+      font-weight:600;
+    }
+
+    h1{
+      margin:0 0 8px 0;
+      font-size:22px;
+      color: #67d3ff;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      justify-content:center;
+    }
+    h1 .key{
+      font-size:20px;
+    }
+    p.lead{
+      margin:0 0 18px 0;
+      color:var(--muted);
+      line-height:1.4;
+    }
+
+    .btn{
+      display:block;
+      width:100%;
+      padding:14px 16px;
+      font-size:16px;
+      border-radius:12px;
+      border:0;
+      cursor:pointer;
+      margin-bottom:12px;
+      box-shadow: 0 6px 16px rgba(2,6,23,0.5);
+      transition: transform .08s ease, opacity .12s ease;
+      color:white;
+      text-align:center;
+    }
+    .btn:active{ transform: translateY(1px); }
+
+    .btn.blue{ background:var(--btn1); }
+    .btn.red{ background:var(--btn2); }
+    .btn.orange{ background:var(--btn3); color:#081018 }
+    .small{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:8px;
+      text-align:center;
+    }
+
+    .status{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      margin-top:14px;
+      justify-content:center;
+    }
+    .pill{
+      background: rgba(255,255,255,0.03);
+      padding:8px 12px;
+      border-radius:999px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .hidden {
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
+      opacity:0;
+    }
+
+    @media (max-width:420px){
+      .card{ padding:20px; border-radius:14px; }
+      .btn{ padding:12px 14px; font-size:15px; border-radius:10px; }
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 30px;
+      background: rgba(0,0,0,0.6);
+      color: #e6eef6;
+      padding:10px 16px;
+      border-radius:10px;
+      font-size:14px;
+      display:none;
+      z-index:9999;
+      border:1px solid rgba(255,255,255,0.04);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="region" aria-label="Unlock Script">
+
+      <!-- Profile section -->
+      <div class="profile">
+        <img src="https://raw.githubusercontent.com/namnnni2/Nam/refs/heads/main/z7154992178185_7d663dc234dc7e09fb3f129dd807fa6e.jpg" alt="Waguri Roblox">
+        <h2>Waguri Roblox</h2>
+      </div>
+
+      <h1><span class="key">🔑</span> Unlock Script</h1>
+      <p class="lead">Nhấn nút để copy script — sau đó paste vào executor Roblox của bạn.</p>
+
+      <button id="copyGAG" class="btn blue" aria-describedby="gag-desc">
+        📥 Copy Grow A Garden Script
+      </button>
+      <div id="gag-desc" class="small">loadstring ready to paste</div>
+
+      <button id="copySAB" class="btn red" aria-describedby="sab-desc">
+        📥 Copy Steal A Brainrot Script
+      </button>
+      <div id="sab-desc" class="small">loadstring ready to paste</div>
+
+      <div class="status" aria-hidden="true">
+        <div class="pill">Made for mobile & desktop</div>
+        <div class="pill">2 scripts available</div>
+      </div>
+    </div>
+  </div>
+
+  <textarea id="hiddenCopy" class="hidden" aria-hidden="true"></textarea>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const scriptGrowAGarden = `loadstring(game:HttpGet("https://raw.githubusercontent.com/Ahnnad99/Speed-Hub-X/refs/heads/main/Speed%20Hub%20X.lua"))()`;
+    const scriptStealBrainrot = `loadstring(game:HttpGet("https://raw.githubusercontent.com/Ahnnad99/StormHub/refs/heads/main/StormLoaderV2"))()`;
+
+    async function copyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+          await navigator.clipboard.writeText(text);
+          return true;
+        } catch (e) {}
+      }
+      const ta = document.getElementById('hiddenCopy');
+      ta.value = text;
+      ta.select();
+      try {
+        const ok = document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        return ok;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function showToast(msg, timeout = 2000) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.display = 'block';
+      t.style.opacity = '1';
+      clearTimeout(t._hideTimer);
+      t._hideTimer = setTimeout(() => {
+        t.style.opacity = '0';
+        t.style.display = 'none';
+      }, timeout);
+    }
+
+    const btnGAG = document.getElementById('copyGAG');
+    const btnSAB = document.getElementById('copySAB');
+
+    btnGAG.addEventListener('click', async () => {
+      btnGAG.disabled = true;
+      const prev = btnGAG.textContent;
+      btnGAG.textContent = 'Copying...';
+      const ok = await copyText(scriptGrowAGarden);
+      btnGAG.textContent = ok ? '✅ Đã copy Grow A Garden' : '❌ Copy thất bại';
+      showToast(ok ? 'Copied Grow A Garden script!' : 'Copy failed. Vui lòng thử lại.');
+      setTimeout(() => {
+        btnGAG.textContent = prev;
+        btnGAG.disabled = false;
+      }, 1400);
+    });
+
+    btnSAB.addEventListener('click', async () => {
+      btnSAB.disabled = true;
+      const prev = btnSAB.textContent;
+      btnSAB.textContent = 'Copying...';
+      const ok = await copyText(scriptStealBrainrot);
+      btnSAB.textContent = ok ? '✅ Đã copy Steal A Brainrot' : '❌ Copy thất bại';
+      showToast(ok ? 'Copied Steal A Brainrot script!' : 'Copy failed. Vui lòng thử lại.');
+      setTimeout(() => {
+        btnSAB.textContent = prev;
+        btnSAB.disabled = false;
+      }, 1400);
+    });
+  </script>
+</body>
+</html>
